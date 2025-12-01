@@ -184,7 +184,12 @@ make_one_list <- function(list_of_proteins, first_protein_index, max_run_size = 
     }
   }
   }
-  
+
+#this overcomes the pathological behavior of the R sample function with an imput of size 1. 
+sample_real <- function(x, size, replace = F, prob = NULL) {
+  if (length(x) == 1) return(x)
+  base::sample(x, size = size, replace = replace, prob = prob)
+}
   return(list(temp_group, matrix_of_pairs))
   
 }
