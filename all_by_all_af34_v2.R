@@ -1,6 +1,3 @@
-#
-source("~/Documents/AF3/make_list_of_af3.R")
-
 #read
 #list_of_proteins <- seqinr::read.fasta("mgen_proteins.txt", forceDNAtolower = FALSE, as.string = TRUE, whole.header = TRUE)
 #names(list_of_proteins) <- do.call("rbind", strsplit(do.call("rbind", strsplit(names(list_of_proteins), split = "locus_tag="))[,2], split = "] "))[,1]
