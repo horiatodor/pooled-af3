@@ -2,9 +2,9 @@
 
 This repository describes the generation of "pools" of proteins and the analysis of their predicted structures as performed in:
 
-https://www.biorxiv.org/content/10.1101/2025.07.01.662654v2
+https://link.springer.com/article/10.1038/s44320-026-00189-7
 
-This code can be vastly improved and should be used to replicate the results of that manuscript and as inspiration for future code, not necessarily as the "gold-standard" of pooled-AlphaFold3 code. 
+This code can be vastly improved and should be used to replicate the results of that manuscript and as inspiration for future code, not necessarily as the "gold-standard" of pooled-AlphaFold3 code. Jurgen Janes has a more up-to-date repo: https://github.com/jurgjn/pooled-ppi
 
 
 ## This code will help you take a fasta file of protein sequences and generate a set of "pools" suitable for running pooled-AlphaFold3 using the free webserver. 
