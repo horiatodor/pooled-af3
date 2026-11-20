@@ -2,6 +2,13 @@
 #list_of_proteins <- seqinr::read.fasta("mgen_proteins.txt", forceDNAtolower = FALSE, as.string = TRUE, whole.header = TRUE)
 #names(list_of_proteins) <- do.call("rbind", strsplit(do.call("rbind", strsplit(names(list_of_proteins), split = "locus_tag="))[,2], split = "] "))[,1]
 
+#helper used by all_by_all() and make_one_list() - must be defined at top level
+#this overcomes the pathological behavior of the R sample function with an input of size 1. 
+sample_real <- function(x, size, replace = F, prob = NULL) {
+  if (length(x) == 1) return(x)
+  base::sample(x, size = size, replace = replace, prob = prob)
+}
+
 #################
 #make all by all lists
 #################
@@ -182,11 +189,6 @@ make_one_list <- function(list_of_proteins, first_protein_index, max_run_size = 
   }
   }
 
-#this overcomes the pathological behavior of the R sample function with an imput of size 1. 
-sample_real <- function(x, size, replace = F, prob = NULL) {
-  if (length(x) == 1) return(x)
-  base::sample(x, size = size, replace = replace, prob = prob)
-}
   return(list(temp_group, matrix_of_pairs))
   
 }

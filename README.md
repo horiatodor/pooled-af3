@@ -55,7 +55,7 @@ This code can be vastly improved and should be used to replicate the results of 
     ```
     #read in all of the description files and concetenate them
     description_files <- paste0("/Volumes/Samsung_T5/AF3 backup/job_info/", list.files("/Volumes/Samsung_T5/AF3 backup/job_info/"))
-    description_files <- description_files[-grep("matrix_of_pairs", description_files)]
+    description_files <- description_files[grepl("\\.csv$", description_files) & !grepl("matrix_of_pairs", description_files)]
     list_of_descriptions <- list()
     
     for (i in seq_along(description_files)){
@@ -98,7 +98,7 @@ This code can be vastly improved and should be used to replicate the results of 
 
     or
 
-    list_of_iptm_size_corr <- size_correct(temp2[[1]], mgen_proteins, coefs = c(-0.0363, 0.00447)[[1]]
+    list_of_iptm_size_corr <- size_correct(temp2[[1]], mgen_proteins, coefs = c(-0.0363, 0.00447))[[1]]
     ```
   
   
