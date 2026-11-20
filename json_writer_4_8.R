@@ -4,31 +4,17 @@ require(jsonlite)
 
 #' 
 #' each .json file contains [batch size] of jobs - right now set to 30, since that's the daily use per day.
-#' first, setup_run calls Horia's make_list_of_af3.R script.
-#' This produces a huge list of lists of proteins for every job. From there, they are broken up into batches and written:
-#' 1. setup_run calls job_parser, which breaks up the list into smaller lists of [batch size] 
+#' Input is the list of pools produced by all_by_all() (all_by_all_af34_v2.R). From there, they are broken up into batches and written:
+#' 1. job_parser breaks up the list into smaller lists of [batch size] 
 #' 2. job_parser makes an information file (which proteins are in which job) for each batched list of jobs, 
 #'    and calls job_writer to actually write the .json format for each job. It takes all the .json formats for each 
 #'    batch and puts them into one .json file, so you can drag and drop one file instead of 30 into the web server 
 #'    (google lets you put up to 100 jobs in a .json, but 30 is easier for bookkeeping)
-#' 4. finally, setup_run calls write_files to write everything to the specified directory.
+#' 3. write_files writes everything to the specified directory.
 #' 
 
 
 #functions ################
-
-#takes in all the info of few and all proteins ('tokens' - eventually we will generalize this to include RNA), call's Horia's code to
-#make all the runs, then breaks them up into .json files. Finally, writes the .json files and informational .csv files to directory
-setup_run <- function(all_tokens, tokens_of_int, name_prefix = "alphafold_runs", output_dir = "", batch_size = 30) {
-  #make the list of runs
-  runs <- make_list_of_af3_runs(all_tokens, tokens_of_int)
-
-  #call to get all the runs  written into json files
-  parsed_jobs <- job_parser(runs, name_prefix, batch_size = 30) #batch size indicates how many runs to put in each json
-  
-  #write all batches to separate files - and information files after. 
-  write_files(parsed_jobs, name_prefix, output_dir)
-}
 
 #this writes all the parsed jobs into whatever output directory you give it. For now, it dumps both the .json files and informational
 # .csv files into the same folder, but it would be easy enough to change this.
